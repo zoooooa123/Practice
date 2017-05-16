@@ -27,9 +27,4 @@ public:
     }
 };
 
-bool operator==(const std::pair<int, int> &lhs, const std::pair<int, int> &rhs)
-{
-    return lhs.first == rhs.first && lhs.second == rhs.second;
-}
-
 
