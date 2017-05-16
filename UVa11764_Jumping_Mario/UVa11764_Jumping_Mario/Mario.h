@@ -6,6 +6,7 @@
 class Mario 
 {
 public:
+    void SetInputGroupTimes() {std::cin >> m_RemainInputTimes;}
     static std::pair<int, int> CalculateJump(std::vector<unsigned int> &jump)
     {
         int higherTimes = 0, lowerTimes = 0;
@@ -25,6 +26,8 @@ public:
         }
         return std::make_pair(higherTimes, lowerTimes);
     }
+private:
+    size_t m_RemainInputTimes;
 };
 
 
