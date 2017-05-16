@@ -8,7 +8,21 @@ class Mario
 public:
     static std::pair<int, int> CalculateJump(std::vector<unsigned int> &jump)
     {
-        return std::make_pair(0,0);
+        int higherTimes = 0, lowerTimes = 0;
+        for (unsigned int now : jump)
+        {
+            static unsigned int prevJumpHeight = jump[0];
+            if (now > prevJumpHeight)
+            {
+                ++higherTimes;
+            }
+            else if (now < prevJumpHeight)
+            {
+                ++lowerTimes;
+            }
+            prevJumpHeight = now;
+        }
+        return std::make_pair(higherTimes, lowerTimes);
     }
 };
 
