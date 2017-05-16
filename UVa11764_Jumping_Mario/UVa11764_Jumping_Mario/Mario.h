@@ -9,9 +9,10 @@ public:
     static std::pair<int, int> CalculateJump(std::vector<unsigned int> &jump)
     {
         int higherTimes = 0, lowerTimes = 0;
+        unsigned int prevJumpHeight = jump[0];
+
         for (unsigned int now : jump)
         {
-            static unsigned int prevJumpHeight = jump[0];
             if (now > prevJumpHeight)
             {
                 ++higherTimes;
