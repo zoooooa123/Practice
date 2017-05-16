@@ -15,3 +15,10 @@ TEST(Mario, CalculateJumpUpAndDown)
     vector<unsigned int> jump3 = { 1,2,3,4,5 };
     EXPECT_EQ(make_pair(4, 0), Mario::CalculateJump(jump3));
 }
+
+TEST(Mario, ShowResult)
+{
+    EXPECT_EQ("Case 1: 4 2", Mario::ShowResult(1, 4, 2));
+    EXPECT_EQ("Case 2: 0 0", Mario::ShowResult(2, 0, 0));
+    EXPECT_EQ("Case 3: 4 0", Mario::ShowResult(3, 4, 0));
+}
