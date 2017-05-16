@@ -1,11 +1,12 @@
 #pragma once
 #include <vector>
 #include <utility>
+#include <iostream>
 
 class Mario 
 {
 public:
-    static std::pair<int, int> CalculateJump(std::vector<unsigned int>::const_iterator iter)
+    static std::pair<int, int> CalculateJump(std::vector<unsigned int> &jump)
     {
         return std::make_pair(0,0);
     }
