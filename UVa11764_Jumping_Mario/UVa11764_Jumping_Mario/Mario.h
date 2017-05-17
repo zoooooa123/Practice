@@ -8,6 +8,19 @@ class Mario
 {
 public:
     void SetInputGroupTimes() {std::cin >> m_RemainInputTimes;}
+    void DoSomething()
+    {
+        while (m_RemainInputTimes--)
+        {
+            unsigned int i = 0;
+            std::vector<unsigned int> input;
+            while (std::cin >> i)
+            {
+                input.push_back(i);
+            }
+            Mario::CalculateJump(input);
+        }
+    }
     static std::pair<int, int> CalculateJump(std::vector<unsigned int> &jump)
     {
         int higherTimes = 0, lowerTimes = 0;
@@ -27,14 +40,10 @@ public:
         }
         return std::make_pair(higherTimes, lowerTimes);
     }
-
     static std::string ShowResult(unsigned int caseID, unsigned int higherTimes, unsigned int lowerTimes)
     {
         return "Case " + std::to_string(caseID) + ": " + std::to_string(higherTimes) + " " + std::to_string(lowerTimes);
     }
-
 private:
     size_t m_RemainInputTimes;
 };
-
-
