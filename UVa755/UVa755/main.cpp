@@ -3,7 +3,7 @@
 #include <map>
 using namespace std;
 
-const char table[26] = {'2','2','2','3','3','3','4','4','4','5','5','5','6','6','6','7',' ','7','7','8','8','8','9','9','9',' '};
+const string table = "2223334445556667 77888999 ";
 map<string, size_t> dataMap;
 
 string Parsing(const string& input)
@@ -28,10 +28,7 @@ void RecordResult(const string& input)
 {
     try
     {
-        if (dataMap.at(input))
-        {
-            ++dataMap[input];
-        }
+        ++dataMap.at(input);
     }
     catch (out_of_range)
     {
@@ -41,7 +38,7 @@ void RecordResult(const string& input)
 
 void ShowResult()
 {
-    bool noDuplicate = true;
+    bool hasDuplicate = false;
 
     for (auto& element : dataMap)
     {
@@ -49,11 +46,11 @@ void ShowResult()
         {
             continue;
         }
-        noDuplicate = false;
+        hasDuplicate = true;
         cout << element.first << " " << element.second << endl;
     }
 
-    if (noDuplicate)
+    if (!hasDuplicate)
     {
         cout << endl << "No duplicates.";
     }
@@ -67,15 +64,15 @@ int main()
     cin >> datasetsNum;
     cin.ignore(1, '\n');
 
-    while (--datasetsNum >= 0)
+    while (datasetsNum--)
     {
         int telephoneNums;
         cin >> telephoneNums;
         cin.ignore(1, '\n');
-        while (--telephoneNums >= 0)
+        while (telephoneNums--)
         {
             string telephoneNumber;
-            getline(cin, telephoneNumber,'\n');
+            getline(cin, telephoneNumber);
             RecordResult(Parsing(telephoneNumber));
         }
 
