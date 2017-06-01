@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cctype>
 #include <string>
 #include <map>
 using namespace std;
@@ -11,7 +12,7 @@ string Parsing(const string& input)
     string output;
     for (char character : input)
     {
-        if ('A' <= character && character <= 'Z')
+        if (isupper(character))
         {
             character = table[character - 'A'];
         }
