@@ -53,9 +53,8 @@ void ShowResult()
 
     if (!hasDuplicate)
     {
-        cout << endl << "No duplicates.";
+        cout << "No duplicates." << endl;
     }
-    cout << endl;
 }
 
 int main()
@@ -73,12 +72,17 @@ int main()
         while (telephoneNums--)
         {
             string telephoneNumber;
-            getline(cin, telephoneNumber);
+            cin >> telephoneNumber;
             RecordResult(Parsing(telephoneNumber));
         }
 
         ShowResult();
         dataMap.clear();
+
+        if (datasetsNum)
+        {
+            cout << endl;
+        }
     }
     return 0;
 }
