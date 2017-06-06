@@ -2,13 +2,19 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <set>
 using namespace std;
 
 struct Point
 {
-    double x = 0.0;
-    double y = 0.0;
+    double x;
+    double y;
 };
+
+void CalulateFourthPoint( const Point& first, const Point& second, const Point& third)
+{
+    double x = 0.0, y = 0.0;
+}
 
 ostream& operator >> (ostream& outstream, const Point& P)
 {
@@ -16,12 +22,19 @@ ostream& operator >> (ostream& outstream, const Point& P)
     return outstream;
 }
 
-void test_case(const string& input)
+void test_case(stringstream input)
 {
-    Point p1,p2,p3,p4;
-    stringstream ss(input);
-    ss >> p1.x >> p1.y >> p2.x >> p2.y >> p3.x >> p3.y >> p4.x >> p4.y;
-    vector<Point> allPoint = { p1, p2, p3, p4};
+    vector<Point> vecPoint(4, Point());
+    for (Point& p : vecPoint)
+    {
+        input >> p.x >> p.y;
+    }
+
+    set<Point> setPoint;
+    for (Point& p : vecPoint)
+    {
+        if (setPoint.find(p) != setPoint.end());
+    }
 };
 
 int main()
@@ -29,7 +42,7 @@ int main()
     string eachLine;
     while (getline(cin, eachLine))
     {
-        test_case(eachLine);
+        test_case(stringstream(eachLine));
     }
     return 0;
 }
