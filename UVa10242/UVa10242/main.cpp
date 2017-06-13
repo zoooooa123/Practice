@@ -1,40 +1,59 @@
 #include <iostream>
-#include <string>
 #include <sstream>
-#include <vector>
+#include <iomanip>
+#include <string>
 #include <set>
 using namespace std;
 
 struct Point
 {
-    double x;
-    double y;
+    double m_x;
+    double m_y;
+
+    Point() : m_x(0), m_y(0) {};
+    Point(double x, double y) : m_x(x), m_y(y) {};
 };
 
-void CalulateFourthPoint( const Point& first, const Point& second, const Point& third)
+ostream& operator<< (ostream& outstream, const Point& P)
 {
-    double x = 0.0, y = 0.0;
+    cout << fixed << setprecision(3) << P.m_x << " " << P.m_y << endl;
+    return outstream;
 }
 
-ostream& operator >> (ostream& outstream, const Point& P)
+bool operator< (const Point& lhs, const Point& rhs)
 {
-    cout << P.x << " " << P.y << endl;
-    return outstream;
+    return (lhs.m_x < rhs.m_x || (lhs.m_x == rhs.m_x && lhs.m_y < rhs.m_y)); //op(a,b) and op(b,a) cannot both be true (but they would be if they were equal).
+}
+
+Point CalulateFourthPoint(const set<Point>& pointSet, const Point& dup)
+{
+    double x = 0.0, y = 0.0;
+    for (auto& p : pointSet)
+    {
+        x += p.m_x;
+        y += p.m_y;
+    }
+    return Point(x - 2 * dup.m_x, y - 2 * dup.m_y);
 }
 
 void test_case(stringstream input)
 {
-    vector<Point> vecPoint(4, Point());
-    for (Point& p : vecPoint)
+    set<Point> PointSet;
+    Point duplicatePoint;
+
+    for (int i = 0; i < 4 ; ++i)
     {
-        input >> p.x >> p.y;
+        Point tempPoint;
+        input >> tempPoint.m_x >> tempPoint.m_y;
+        auto result = PointSet.insert(tempPoint); //operator== is not used by std::set. Elements a and b are considered equal iff !(a < b) && !(b < a)
+
+        if (result.second == false)
+        {
+            duplicatePoint = *result.first;
+        }
     }
 
-    set<Point> setPoint;
-    for (Point& p : vecPoint)
-    {
-        if (setPoint.find(p) != setPoint.end());
-    }
+    cout << CalulateFourthPoint(PointSet, duplicatePoint);
 };
 
 int main()
