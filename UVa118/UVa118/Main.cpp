@@ -1,30 +1,7 @@
 #include <iostream>
 #include <sstream>
 #include <string>
-#include <utility>
-#include <vector>
-
-class Robot
-{
-public:
-    Robot(const size_t x, const size_t y) : m_map_boundary(std::make_pair(x, y)) { }
-    void SetInitPosition(const size_t x, const size_t y, const char orientation)
-    {
-        m_position_now = std::make_pair(x,y);
-        m_orientation_now = orientation;
-    };
-    void SetInstruction(const std::string& instruction)
-    {
-        m_Instruction = instruction;
-    };
-    void Go() {  }
-
-private:
-    std::pair<size_t, size_t> m_map_boundary;
-    std::pair<size_t, size_t> m_position_now;
-    char m_orientation_now;
-    std::string m_Instruction;
-};
+#include "Robot.h"
 
 int main()
 {
