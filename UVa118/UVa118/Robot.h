@@ -1,7 +1,8 @@
 #pragma once
 #include <string>
 #include <utility>
-
+#include <set>
+#include <tuple>
 enum Oritation
 {
     North,
@@ -20,6 +21,8 @@ public:
     bool MoveOneStep();
     bool AdjustNextCommand(char input);
 
+    std::set<std::pair<std::pair<size_t, size_t>, Oritation>> m_ForbiddenInstruction;
+
 private:
 
     char PrinOritation(Oritation& input);
@@ -27,4 +30,6 @@ private:
     std::pair<size_t, size_t> m_position_now;
     Oritation m_orientation_now;
     std::string m_Instruction;
+
+    
 };

@@ -66,6 +66,7 @@ void Robot::Go()
         if (!AdjustNextCommand(command))
         {
             cout << m_position_now.first << " " << m_position_now.second << " " << PrinOritation(m_orientation_now) << " LOST" << endl;
+            m_ForbiddenInstruction.insert(make_pair(m_position_now, m_orientation_now));
             return;
         }
     }
@@ -75,24 +76,37 @@ void Robot::Go()
 
 bool Robot::MoveOneStep()
 {
+    if (m_ForbiddenInstruction.find(make_pair(m_position_now, m_orientation_now)) != m_ForbiddenInstruction.end())
+    {
+        return true;
+    }
+
+    std::pair<size_t, size_t> m_position_next(m_position_now);
     switch (m_orientation_now)
     {
     case North:
-        ++m_position_now.second;
+        ++m_position_next.second;
         break;
     case East:
-        ++m_position_now.first;
+        ++m_position_next.first;
         break;
     case South:
-        --m_position_now.second;
+        --m_position_next.second;
         break;
     case West:
-        --m_position_now.first;
-        break;
-    default:
+        --m_position_next.first;
         break;
     }
-    return (m_position_now.first < m_map_boundary.first) && (m_position_now.second < m_map_boundary.second);
+
+    if ((m_position_next.first > m_map_boundary.first) || (m_position_next.second > m_map_boundary.second))
+    {
+        return false;
+    }
+    else
+    {
+        m_position_now = m_position_next;
+        return true;
+    }
 }
 
 bool Robot::AdjustNextCommand(char input)
